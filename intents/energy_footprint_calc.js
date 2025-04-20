@@ -1,12 +1,18 @@
 module.exports = (params) => {
     const people = parseInt(params.people || 1);
     const accountValue = parseFloat(params.accountValue || 100);
-    const usageHours = params.usageHours || {};
-
     const consumptionPerPerson = accountValue / people;
     const kwhMonth = accountValue / 0.9; // R$0,90 por kWh (ajustável)
     const nationalAverage = 160; // Média nacional por pessoa (kWh/mês)
 
+    const usageHours = {
+        tv: parseFloat(params.tvHours || 0),
+        ac: parseFloat(params.acHours || 0),
+        shower: parseFloat(params.showerUses || 0),
+        computer: parseFloat(params.computerHours || 0),
+        fridge: 1 // fixo
+    };
+    
     const appliances = {
         tv: 0.1, // kWh/h
         fridge: 1.2, // kWh/dia fixo
